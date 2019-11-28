@@ -7,19 +7,58 @@ public class SettingsManager {
 
     static SettingsManager instance = null;
     YioGdxGame yioGdxGame;
+    /**
+     * 询问结束
+     */
     public static boolean askToEndTurn = false;
+    /**
+     * 自动保存
+     */
     public static boolean autosave;
+    /**
+     * 长按移动，所有单位进行移动
+     */
     public static boolean longTapToMove;
+    /**
+     * 音效
+     */
     public static boolean soundEnabled = true;
     public static float sensitivity;
+    /**
+     * 水纹理
+     */
     public static boolean waterTextureEnabled;
+    /**
+     * 皮肤序号
+     */
     public static int skinIndex;
+    /**
+     * 回放
+     */
     public static boolean replaysEnabled;
+    /**
+     * 快速构造
+     */
     public static boolean fastConstructionEnabled;
+    /**
+     * 音乐
+     */
     public static boolean musicEnabled;
+    /**
+     * 左手模式
+     */
     public static boolean leftHandMode;
+    /**
+     * 展示继续按钮
+     */
     public static boolean resumeButtonEnabled;
+    /**
+     * 展示城市名字
+     */
     public static boolean cityNamesEnabled;
+    /**
+     * 全屏模式
+     */
     public static boolean fullScreenMode;
 
 

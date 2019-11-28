@@ -81,7 +81,7 @@ public class NamingManager implements SavableYio{
         for (Map.Entry<Hex, String> entry : renamedHexes.entrySet()) {
             Hex hex = entry.getKey();
             String name = entry.getValue();
-            stringBuilder.append(hex.index1).append(" ").append(hex.index2).append(" ").append(name).append(",");
+            stringBuilder.append(hex.indexX).append(" ").append(hex.indexY).append(" ").append(name).append(",");
         }
 
         return stringBuilder.toString();

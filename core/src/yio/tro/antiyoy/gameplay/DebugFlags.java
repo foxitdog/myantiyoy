@@ -11,7 +11,7 @@ public class DebugFlags {
 
     public static boolean showFpsInfo = false;
     public static boolean unlockLevels = false;
-    public static boolean showFocusedHexInConsole = false;
+    public static boolean showFocusedHexInConsole = true;//false;
     public static boolean cheatsEnabled = false;
     public static boolean cheatCharisma = false;
     public static boolean testMode = false;

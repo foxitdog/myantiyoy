@@ -29,6 +29,10 @@ public class SelectionManager {
     long defTipSpawnTime;
     private boolean isSomethingSelected;
     boolean readyToRenameCity;
+
+    /**
+     * 点击后聚焦的点
+     */
     Hex focusedHex;
     boolean areaSelectionMode;
     int asFilterColor; // area selection
@@ -386,6 +390,11 @@ public class SelectionManager {
     }
 
 
+    /**
+     * 选中单位 展示移动区域
+     * @param focusedHex
+     * @return
+     */
     private boolean checkToSelectUnit(Hex focusedHex) {
         if (selectedUnit != null) return false;
         if (!focusedHex.containsUnit()) return true;
@@ -413,6 +422,9 @@ public class SelectionManager {
     }
 
 
+    /**
+     * 占领行为
+     */
     private void reactionAttackEnemy() {
         if (focusedHex.colorIndex == gameController.getTurn()) return;
         if (!focusedHex.inMoveZone) return;

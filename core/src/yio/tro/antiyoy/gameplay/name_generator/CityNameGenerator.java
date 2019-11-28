@@ -81,7 +81,7 @@ public class CityNameGenerator {
 
 
     public String generateName(Hex capitalHex) {
-        Random random = new Random(capitalHex.index1 + 53 * capitalHex.index2);
+        Random random = new Random(capitalHex.indexX + 53 * capitalHex.indexY);
 
         nameGenerator.setMasks(masks);
         nameGenerator.setGroups(groups);

@@ -1,6 +1,5 @@
 package yio.tro.antiyoy.gameplay;
 
-import yio.tro.antiyoy.stuff.TimeMeasureYio;
 import yio.tro.antiyoy.stuff.Yio;
 import yio.tro.antiyoy.gameplay.rules.GameRules;
 
@@ -255,7 +254,7 @@ public class MapGeneratorGeneric extends MapGenerator {
 
         for (Hex activeHex : getActiveHexes()) {
             if (activeHex.isNeutral()) continue;
-            currentDistance = Yio.distance(hex.index1, hex.index2, activeHex.index1, activeHex.index2);
+            currentDistance = Yio.distance(hex.indexX, hex.indexY, activeHex.indexX, activeHex.indexY);
             if (minDistance == -1 || currentDistance < minDistance) {
                 minDistance = currentDistance;
             }

@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 外交管理
+ */
 public class DiplomacyManager {
 
     FieldController fieldController;
@@ -484,7 +487,7 @@ public class DiplomacyManager {
         StringBuilder builder = new StringBuilder();
 
         for (Hex hex : hexList) {
-            builder.append(hex.index1).append("%").append(hex.index2).append("@");
+            builder.append(hex.indexX).append("%").append(hex.indexY).append("@");
         }
 
         return builder.toString();

@@ -4,12 +4,23 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
+ * 小球
  * Created by yiotro on 13.08.2014.
  */
 public class Splat {
 
     final TextureRegion textureRegion;
-    float x, y, dx, dy, wind, r, speedMultiplier;
+    float x, y,
+    //    x速度
+    dx,
+    //    y速度
+    dy,
+    //  风的加速度
+    wind,
+    //半径
+    r,
+    //   速度常数
+    speedMultiplier;
 
 
     public Splat(TextureRegion textureRegion, float x, float y) {
@@ -43,7 +54,7 @@ public class Splat {
     public void setRadius(float r) {
         this.r = r;
         speedMultiplier = (0.05f * Gdx.graphics.getHeight()) / r;
-//        speedMultiplier = (float)Math.sqrt(speedMultiplier);
+        //        speedMultiplier = (float)Math.sqrt(speedMultiplier);
     }
 
 

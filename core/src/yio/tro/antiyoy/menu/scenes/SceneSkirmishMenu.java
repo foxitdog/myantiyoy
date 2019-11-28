@@ -16,7 +16,10 @@ import yio.tro.antiyoy.stuff.RectangleYio;
 
 import java.util.ArrayList;
 
-public class SceneSkirmishMenu extends AbstractScene {
+/**
+ * 遭遇战
+ */
+public class  SceneSkirmishMenu extends AbstractScene {
 
 
     public ButtonYio startButton;

@@ -1,6 +1,5 @@
 package yio.tro.antiyoy.gameplay;
 
-import yio.tro.antiyoy.YioGdxGame;
 import yio.tro.antiyoy.stuff.GraphicsYio;
 import yio.tro.antiyoy.stuff.PointYio;
 import yio.tro.antiyoy.stuff.Yio;
@@ -15,8 +14,22 @@ public class MapGenerator {
 
     protected final GameController gameController;
     private final DetectorProvince detectorProvince;
+    /**
+     * boundwidth:边界宽
+     * boundheight:边界高
+     */
     protected float boundWidth, boundHeight;
+
+    /**
+     * fWidth:
+     * fHeight:
+     * w:
+     * h:
+     */
     protected int fWidth, fHeight, w, h;
+    /**
+     * 地图块
+     */
     protected Hex[][] field;
     protected Random random;
     protected ArrayList<PointYio> islandCenters;
@@ -380,19 +393,19 @@ public class MapGenerator {
 
     protected void centerLand() {
         Hex centerHex = getCenterHex();
-        int utterLeft = centerHex.index1;
-        int utterRight = centerHex.index1;
-        int utterUp = centerHex.index2;
-        int utterDown = centerHex.index2;
+        int utterLeft = centerHex.indexX;
+        int utterRight = centerHex.indexX;
+        int utterUp = centerHex.indexY;
+        int utterDown = centerHex.indexY;
         for (Hex activeHex : gameController.fieldController.activeHexes) {
-            if (activeHex.index1 < utterLeft) utterLeft = activeHex.index1;
-            if (activeHex.index1 > utterRight) utterRight = activeHex.index1;
-            if (activeHex.index2 < utterDown) utterDown = activeHex.index2;
-            if (activeHex.index2 > utterUp) utterUp = activeHex.index2;
+            if (activeHex.indexX < utterLeft) utterLeft = activeHex.indexX;
+            if (activeHex.indexX > utterRight) utterRight = activeHex.indexX;
+            if (activeHex.indexY < utterDown) utterDown = activeHex.indexY;
+            if (activeHex.indexY > utterUp) utterUp = activeHex.indexY;
         }
         int averageHorizontal = (utterLeft + utterRight) / 2;
         int averageVertical = (utterDown + utterUp) / 2;
-        relocateMap(centerHex.index1 - averageHorizontal, centerHex.index2 - averageVertical);
+        relocateMap(centerHex.indexX - averageHorizontal, centerHex.indexY - averageVertical);
     }
 
 
@@ -528,6 +541,9 @@ public class MapGenerator {
     }
 
 
+    /**
+     * @return 到中点的位置
+     */
     protected double distanceFromCenterToCorners() {
         return Yio.distance(0, 0, boundWidth / 2, boundHeight / 2);
     }
@@ -545,11 +561,18 @@ public class MapGenerator {
     }
 
 
+    /**
+     * @return 随机的角度
+     */
     protected double getRandomAngle() {
         return random.nextDouble() * 2d * Math.PI;
     }
 
 
+    /**
+     * 随机bound中的一个地块
+     * @return
+     */
     protected Hex getRandomHexInsideBounds() {
         while (true) {
             Hex hex;
@@ -573,6 +596,12 @@ public class MapGenerator {
     }
 
 
+    /**
+     * 以某种颜色接货地块
+     * @param hex
+     * @param color
+     * @return true：激活成功，false：激活失败
+     */
     protected boolean activateHex(Hex hex, int color) {
         if (hex.active) return false;
         hex.active = true;
@@ -583,12 +612,22 @@ public class MapGenerator {
     }
 
 
+    /**
+     * 注销地块
+     * @param hex
+     */
     protected void deactivateHex(Hex hex) {
         hex.active = false;
         gameController.fieldController.activeHexes.remove(hex);
     }
 
 
+    /**
+     * 扩充岛
+     * 扩散地图点，以starthex为中心点进行扩展size范围的hex块
+     * @param startHex
+     * @param size
+     */
     protected void spawnIsland(Hex startHex, int size) {
         clearGenFlags();
         startHex.genPotential = size;
@@ -645,7 +684,7 @@ public class MapGenerator {
     }
 
 
-    protected int getClosestIslandIndex(int searcherIslandIndex) {
+    protected int  getClosestIslandIndex(int searcherIslandIndex) {
         PointYio startPoint = islandCenters.get(searcherIslandIndex);
         int closestIslandIndex = -1;
         double minDistance = fWidth * fHeight, currentDistance;
@@ -696,6 +735,9 @@ public class MapGenerator {
     }
 
 
+    /**
+     * @return 根据地图大小获取岛
+     */
     protected int numberOfIslandsByLevelSize() {
         switch (gameController.levelSizeManager.levelSize) {
             default:
@@ -711,6 +753,9 @@ public class MapGenerator {
     }
 
 
+    /**
+     * 创建陆地
+     */
     protected void createLand() {
         while (!isGood()) {
             deactivateHexes();

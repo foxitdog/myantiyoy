@@ -8,15 +8,31 @@ import yio.tro.antiyoy.gameplay.Province;
 public abstract class AbstractUserLevel {
 
 
+    /**
+     * 地图数据
+     * @return
+     */
     public abstract String getFullLevelString();
 
 
+    /**
+     * 地图名称
+     * @return
+     */
     public abstract String getMapName();
 
 
+    /**
+     * 地图作者
+     * @return
+     */
     public abstract String getAuthor();
 
 
+    /**
+     * 关键字
+     * @return
+     */
     public abstract String getKey();
 
 

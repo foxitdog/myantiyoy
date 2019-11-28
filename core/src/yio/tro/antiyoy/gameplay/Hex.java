@@ -6,24 +6,45 @@ import yio.tro.antiyoy.gameplay.rules.GameRules;
 import yio.tro.antiyoy.stuff.object_pool.ReusableYio;
 
 
+/**
+ * 地块
+ */
 public class Hex implements ReusableYio{
 
+    /**
+     * 有效的点
+     */
     public boolean active, selected, changingColor, flag, inMoveZone, genFlag, ignoreTouch;
-    public int index1, index2, moveZoneNumber, genPotential, viewDiversityIndex;
+    /**
+     * indexX:indexX,
+     * indexY:indexY,结合索引位置
+     */
+    public int indexX , indexY, moveZoneNumber, genPotential, viewDiversityIndex;
+    /**
+     * pos 界面坐标位置
+     * fieldpos：field controller提供的位置
+     */
     public PointYio pos, fieldPos;
     private GameController gameController;
     FieldController fieldController;
     float cos60, sin60;
-    public int colorIndex, lastColorIndex, objectInside;
+    /**
+     *
+     * objectInside:包含的建筑
+     */
+    public int
+            colorIndex,
+            lastColorIndex,
+            objectInside;
     long animStartTime;
     boolean blockToTreeFromExpanding, canContainObjects;
     public FactorYio animFactor, selectionFactor;
     public Unit unit;
 
 
-    public Hex(int index1, int index2, PointYio fieldPos, FieldController fieldController) {
-        this.index1 = index1;
-        this.index2 = index2;
+    public Hex(int indexX, int indexY, PointYio fieldPos, FieldController fieldController) {
+        this.indexX = indexX;
+        this.indexY = indexY;
         this.fieldPos = fieldPos;
         this.fieldController = fieldController;
         if (fieldController == null) return;
@@ -36,7 +57,7 @@ public class Hex implements ReusableYio{
         animFactor = new FactorYio();
         selectionFactor = new FactorYio();
         unit = null;
-        viewDiversityIndex = (101 * index1 * index2 + 7 * index2) % 3;
+        viewDiversityIndex = (101 * indexX * indexY + 7 * indexY) % 3;
         canContainObjects = true;
         updatePos();
     }
@@ -54,8 +75,8 @@ public class Hex implements ReusableYio{
 
 
     void updatePos() {
-        pos.x = fieldPos.x + fieldController.hexStep2 * index2 * sin60;
-        pos.y = fieldPos.y + fieldController.hexStep1 * index1 + fieldController.hexStep2 * index2 * cos60;
+        pos.x = fieldPos.x + fieldController.hexStep2 * indexY * sin60;
+        pos.y = fieldPos.y + fieldController.hexhight * indexX + fieldController.hexStep2 * indexY * cos60;
     }
 
 
@@ -141,7 +162,7 @@ public class Hex implements ReusableYio{
 
 
     public Hex getSnapshotCopy() {
-        Hex record = new Hex(index1, index2, fieldPos, fieldController);
+        Hex record = new Hex(indexX, indexY, fieldPos, fieldController);
         record.active = active;
         record.colorIndex = colorIndex;
         record.objectInside = objectInside;
@@ -303,13 +324,13 @@ public class Hex implements ReusableYio{
 
 
     public void set(Hex hex) {
-        index1 = hex.index1;
-        index2 = hex.index2;
+        indexX = hex.indexX;
+        indexY = hex.indexY;
     }
 
 
     public boolean equals(Hex hex) {
-        return hex.index1 == index1 && hex.index2 == index2;
+        return hex.indexX == indexX && hex.indexY == indexY;
     }
 
 
@@ -322,6 +343,11 @@ public class Hex implements ReusableYio{
     }
 
 
+    /**
+     * 当前六边形的相邻方向的六边形 共6个方向（左上，上，右上，左下，下，右下）
+     * @param direction
+     * @return
+     */
     public Hex getAdjacentHex(int direction) {
         return gameController.fieldController.adjacentHex(this, direction);
     }
@@ -333,7 +359,7 @@ public class Hex implements ReusableYio{
 
 
     public boolean isNullHex() {
-        return index1 == -1 && index2 == -1;
+        return indexX == -1 && indexY == -1;
     }
 
 
@@ -391,6 +417,6 @@ public class Hex implements ReusableYio{
 
     @Override
     public String toString() {
-        return "[Hex: c" + colorIndex + " (" + index1 + ", " + index2 + ")]";
+        return "[Hex: c" + colorIndex + " (" + indexX + ", " + indexY + ")]";
     }
 }

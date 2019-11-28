@@ -4,6 +4,11 @@ import yio.tro.antiyoy.gameplay.*;
 
 import static yio.tro.antiyoy.gameplay.rules.GameRules.*;
 
+/**
+ * 兵种没回合花费收入 1:2,2:6,3:18,4:36
+ * 砍树加钱
+ * 最高级单位可以互砍
+ */
 public class RulesetGeneric extends Ruleset{
 
 
@@ -104,6 +109,11 @@ public class RulesetGeneric extends Ruleset{
     }
 
 
+    /**
+     * 砍树加钱
+     * @param unit
+     * @param hex
+     */
     @Override
     public void onUnitMoveToHex(Unit unit, Hex hex) {
         if (!hex.containsTree()) return;

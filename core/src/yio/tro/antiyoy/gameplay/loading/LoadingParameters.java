@@ -23,7 +23,9 @@ public class LoadingParameters {
     public int colorOffset;
     public boolean slayRules;
     public int campaignLevelIndex;
+//    地图数据的保存地方
     public String activeHexes;
+
     public int turn;
     public Replay replay;
     public boolean fogOfWar;

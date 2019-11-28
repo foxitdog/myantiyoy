@@ -21,7 +21,7 @@ public class CameraController {
     long touchDownTime, lastTapTime;
     public RectangleYio field; // bounds of level
     public RectangleYio frame; // what is visible
-    RectangleYio lastMultiTouch, currentMultiTouch;
+    RectangleYio lastMultiTouch,  currentMultiTouch;
     double zoomValues[][], kineticsSpeed;
     PointYio touchPos, position, viewPosition, defaultDragBounds, backVisBounds;
     PointYio delta, kinetics, actualDragBounds;

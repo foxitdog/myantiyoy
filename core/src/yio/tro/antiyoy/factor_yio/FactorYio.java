@@ -3,7 +3,10 @@ package yio.tro.antiyoy.factor_yio;
 
 public class FactorYio {
     boolean itsTimeToStop;
-    double f, gravity, dy, speedMultiplier;
+    /**
+     * f 数值，gravity 权重,dy 速度,speedMultiplier 累加器
+     */
+    double f,gravity, dy, speedMultiplier;
     MoveBehavior moveBehavior;
 
 
@@ -13,6 +16,9 @@ public class FactorYio {
     }
 
 
+    /**
+     * 数值计算
+     */
     public void move() {
         moveBehavior.move(this);
     }

@@ -96,7 +96,7 @@ public class RenderFogOfWar extends GameRender {
 
     private void drawShapeRendererStuff() {
         hexSize = fogOfWarManager.fieldController.hexSize;
-        hexStep1 = fogOfWarManager.fieldController.hexStep1;
+        hexStep1 = fogOfWarManager.fieldController.hexhight;
         PointYio pos;
 
         for (FogSlice viewSlice : fogOfWarManager.viewSlices) {
@@ -193,7 +193,7 @@ public class RenderFogOfWar extends GameRender {
         shapeRenderer.setProjectionMatrix(gameView.orthoCam.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         hexSize = fogOfWarManager.fieldController.hexSize;
-        hexStep1 = fogOfWarManager.fieldController.hexStep1;
+        hexStep1 = fogOfWarManager.fieldController.hexhight;
         PointYio pos;
 
         for (FogSlice viewSlice : fogOfWarManager.viewSlices) {

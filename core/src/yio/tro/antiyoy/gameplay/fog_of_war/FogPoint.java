@@ -7,10 +7,17 @@ import yio.tro.antiyoy.stuff.object_pool.ReusableYio;
 
 public class FogPoint implements ReusableYio{
 
-
     FogOfWarManager fogOfWarManager;
+
+    /*相对应的六边形块*/
     Hex hex;
+    /**
+     * 迷雾状态
+     */
     public boolean status;
+    /**
+     * 位置点
+     */
     public PointYio position;
 
 
@@ -29,11 +36,20 @@ public class FogPoint implements ReusableYio{
     }
 
 
+    /**
+     * 是否可见
+     * @return
+     */
     public boolean isVisible() {
         return status && fogOfWarManager.visibleArea.isPointInside(position, fogOfWarManager.fieldController.hexSize);
     }
 
 
+    /**
+     *
+     * @param i
+     * @param j
+     */
     public void setHexByIndexes(int i, int j) {
         hex = fogOfWarManager.fieldController.getHex(i, j);
 

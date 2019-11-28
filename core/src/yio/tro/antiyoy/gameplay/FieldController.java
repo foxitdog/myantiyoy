@@ -11,7 +11,6 @@ import yio.tro.antiyoy.gameplay.rules.GameRules;
 import yio.tro.antiyoy.menu.scenes.Scenes;
 import yio.tro.antiyoy.stuff.GraphicsYio;
 import yio.tro.antiyoy.stuff.PointYio;
-import yio.tro.antiyoy.stuff.TimeMeasureYio;
 import yio.tro.antiyoy.stuff.Yio;
 
 import java.util.ArrayList;
@@ -22,14 +21,31 @@ public class FieldController {
     public final GameController gameController;
     public static int NEUTRAL_LANDS_INDEX = 7;
     public boolean letsCheckAnimHexes;
+    /**
+     * 六边形的边长
+     */
     public float hexSize;
-    public float hexStep1;
+
+    /**
+     * 六边形的高
+     */
+    public float hexhight;
+
+    /**
+     * 相邻六边形间距离
+     */
     public float hexStep2;
     public Hex field[][];
     public ArrayList<Hex> activeHexes;
     public ArrayList<Hex> selectedHexes;
     public ArrayList<Hex> animHexes;
+    /**
+     * field的宽度，也就是x轴的最大数
+     */
     public int fWidth;
+    /**
+     * field的高度，也就是最大y的数值
+     */
     public int fHeight;
     public PointYio fieldPos;
     public float cos60;
@@ -64,15 +80,25 @@ public class FieldController {
         fieldPos = new PointYio();
         compensatoryOffset = 0;
         updateFieldPos();
+
         hexSize = 0.05f * Gdx.graphics.getWidth(); // radius
-        hexStep1 = (float) Math.sqrt(3) * hexSize; // height
-        hexStep2 = (float) Yio.distance(0, 0, 1.5 * hexSize, 0.5 * hexStep1);
+
+        hexhight = (float) Math.sqrt(3) * hexSize; // height
+
+        hexStep2 = (float) Yio.distance(0, 0, 1.5 * hexSize, 0.5 * hexhight);
+
         fWidth = 85;
+
         fHeight = 55;
+
         activeHexes = new ArrayList<>();
+
         selectedHexes = new ArrayList<>();
+
         animHexes = new ArrayList<>();
+
         solidObjects = new ArrayList<>();
+
         moveZoneManager = new MoveZoneManager(this);
         field = new Hex[fWidth][fHeight];
         responseAnimFactor = new FactorYio();
@@ -276,7 +302,7 @@ public class FieldController {
 
 
     public String getFullLevelString() {
-//        detectProvinces();
+        //        detectProvinces();
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(getBasicInfoString());
         stringBuffer.append("/");
@@ -318,11 +344,11 @@ public class FieldController {
         if (!checkRefuseStatistics()) return -1;
 
         int numberOfAllHexes = activeHexes.size();
-//        for (Province province : provinces) {
-//            if (province.hexList.size() > 0.52 * numberOfAllHexes) {
-//                return province.getColor();
-//            }
-//        }
+        //        for (Province province : provinces) {
+        //            if (province.hexList.size() > 0.52 * numberOfAllHexes) {
+        //                return province.getColor();
+        //            }
+        //        }
 
         int playerHexCount[] = getPlayerHexCount();
         for (int i = 0; i < playerHexCount.length; i++) {
@@ -619,11 +645,11 @@ public class FieldController {
 
 
     public void createFieldMatrix() {
-        for (int i = 0; i < fWidth; i++) {
-            field[i] = new Hex[fHeight];
-            for (int j = 0; j < fHeight; j++) {
-                field[i][j] = new Hex(i, j, fieldPos, this);
-                field[i][j].ignoreTouch = false;
+        for (int x = 0; x < fWidth; x++) {
+            field[x] = new Hex[fHeight];
+            for (int y = 0; y < fHeight; y++) {
+                field[x][y] = new Hex(x, y, fieldPos, this);
+                field[x][y].ignoreTouch = false;
             }
         }
     }
@@ -706,9 +732,16 @@ public class FieldController {
     }
 
 
+    /**
+     * 根据游戏六边坐标系获取定位的6边型
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public Hex getHexByPos(double x, double y) {
         int j = (int) ((x - fieldPos.x) / (hexStep2 * sin60));
-        int i = (int) ((y - fieldPos.y - hexStep2 * j * cos60) / hexStep1);
+        int i = (int) ((y - fieldPos.y - hexStep2 * j * cos60) / hexhight);
         if (i < 0 || i > fWidth - 1 || j < 0 || j > fHeight - 1) return null;
 
         Hex adjHex, resHex = field[i][j];
@@ -737,6 +770,14 @@ public class FieldController {
     }
 
 
+    /**
+     * 指定点的相邻六边形  共6个方向（左上，上，右上，左下，下，右下）
+     *
+     * @param i         当前点的x坐标
+     * @param j         当前点的y坐标
+     * @param direction 方向
+     * @return
+     */
     public Hex adjacentHex(int i, int j, int direction) {
         switch (direction) {
             case 0:
@@ -763,6 +804,11 @@ public class FieldController {
     }
 
 
+    /**
+     * 添加树
+     *
+     * @param hex
+     */
     public void spawnTree(Hex hex) {
         if (!hex.active) return;
         if (hex.isNearWater()) addSolidObject(hex, Obj.PALM);
@@ -770,6 +816,12 @@ public class FieldController {
     }
 
 
+    /**
+     * 添加固定对象，如 树，人，房子
+     *
+     * @param hex
+     * @param type
+     */
     public void addSolidObject(Hex hex, int type) {
         if (hex == null || !hex.active) return;
         if (hex.objectInside == type) return;
@@ -784,6 +836,11 @@ public class FieldController {
     }
 
 
+    /**
+     * 清除点状态，如果该点有单位，则清除该单位
+     *
+     * @param hex
+     */
     public void cleanOutHex(Hex hex) {
         if (hex.containsUnit()) {
             gameController.getMatchStatistics().onUnitKilled();
@@ -805,7 +862,7 @@ public class FieldController {
     public void destroyBuildingsOnHex(Hex hex) {
         boolean hadHouse = (hex.objectInside == Obj.TOWN);
         if (hex.containsBuilding()) cleanOutHex(hex);
-//        if (hex.containsUnit()) killUnitOnHex(hex);
+        //        if (hex.containsUnit()) killUnitOnHex(hex);
         if (hadHouse) {
             spawnTree(hex);
         }
@@ -995,8 +1052,14 @@ public class FieldController {
     }
 
 
+    /**
+     * 指定六边形的相邻六边形 共6个方向（左上，上，右上，左下，下，右下）
+     * @param hex
+     * @param direction
+     * @return
+     */
     public Hex adjacentHex(Hex hex, int direction) {
-        return adjacentHex(hex.index1, hex.index2, direction);
+        return adjacentHex(hex.indexX, hex.indexY, direction);
     }
 
 
@@ -1028,6 +1091,13 @@ public class FieldController {
     }
 
 
+    /**
+     * 相邻点是否相同颜色
+     *
+     * @param hex
+     * @param color
+     * @return
+     */
     public boolean hexHasNeighbourWithColor(Hex hex, int color) {
         Hex neighbour;
         for (int i = 0; i < 6; i++) {
@@ -1129,7 +1199,7 @@ public class FieldController {
         ArrayList<Province> provincesAdded = new ArrayList<Province>();
         Hex startHex, tempHex, adjHex;
         hex.flag = true;
-        gameController.getPredictableRandom().setSeed(hex.index1 + hex.index2);
+        gameController.getPredictableRandom().setSeed(hex.indexX + hex.indexY);
         for (int k = 0; k < 6; k++) {
             startHex = hex.getAdjacentHex(k);
             if (!startHex.active || startHex.colorIndex != color || startHex.flag) continue;
@@ -1180,7 +1250,7 @@ public class FieldController {
             int sum = 0;
             Hex capital = getMaxProvinceFromList(adjacentProvinces).getCapital();
             ArrayList<Hex> hexArrayList = new ArrayList<Hex>();
-//            YioGdxGame.say("uniting provinces: " + adjacentProvinces.size());
+            //            YioGdxGame.say("uniting provinces: " + adjacentProvinces.size());
             for (Province province : adjacentProvinces) {
                 sum += province.money;
                 hexArrayList.addAll(province.hexList);
@@ -1216,9 +1286,15 @@ public class FieldController {
     }
 
 
+    /**
+     * 根据六边形的坐标点设置实际对应的画布的位置
+     * @param pointYio 实际坐标点
+     * @param index1 x
+     * @param index2 y
+     */
     public void updatePointByHexIndexes(PointYio pointYio, int index1, int index2) {
         pointYio.x = fieldPos.x + hexStep2 * index2 * sin60;
-        pointYio.y = fieldPos.y + hexStep1 * index1 + hexStep2 * index2 * cos60;
+        pointYio.y = fieldPos.y + hexhight * index1 + hexStep2 * index2 * cos60;
     }
 
 
@@ -1253,6 +1329,9 @@ public class FieldController {
     }
 
 
+    /**
+     * 查找聚焦的地块
+     */
     public void updateFocusedHex() {
         updateFocusedHex(gameController.touchPoint.x, gameController.touchPoint.y);
     }

@@ -69,11 +69,11 @@ public class GameSaver {
 
 
     private String getHexString(Hex hex) {
-        // index1 - index2 - colorIndex - objectInside - unitStrength - unitReadyToMove - money
+        // indexX - indexY - colorIndex - objectInside - unitStrength - unitReadyToMove - money
 
         StringBuilder builder = new StringBuilder();
-        builder.append(hex.index1);
-        builder.append(" ").append(hex.index2);
+        builder.append(hex.indexX);
+        builder.append(" ").append(hex.indexY);
         builder.append(" ").append(hex.colorIndex);
         builder.append(" ").append(hex.objectInside);
 

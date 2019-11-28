@@ -53,6 +53,10 @@ public class LightUpAlgorithm {
     }
 
 
+    /**
+     * 关闭迷雾块
+     * @param hex 六边形块
+     */
     private void deactivateFogPoint(Hex hex) {
         FogPoint fogPoint = fogOfWarManager.fogMap.get(hex);
         if (fogPoint == null) return;

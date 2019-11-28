@@ -5,6 +5,9 @@ import yio.tro.antiyoy.menu.behaviors.Reaction;
 import yio.tro.antiyoy.menu.ButtonYio;
 import yio.tro.antiyoy.menu.MenuControllerYio;
 
+/**
+ *教程
+ */
 public class SceneTutorialIndex extends AbstractScene{
 
 

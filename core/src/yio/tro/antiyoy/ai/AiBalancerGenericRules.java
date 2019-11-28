@@ -172,8 +172,8 @@ public class AiBalancerGenericRules extends AiExpertGenericRules implements Comp
         if (unit.currentHex.hasThisObjectNearby(Obj.TOWER)) return;
 
         // remember that hex
-        int x = unit.currentHex.index1;
-        int y = unit.currentHex.index2;
+        int x = unit.currentHex.indexX;
+        int y = unit.currentHex.indexY;
 
         // move unit away
         gameController.moveUnit(unit, moveZone.get(random.nextInt(moveZone.size())), province);

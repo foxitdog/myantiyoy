@@ -50,6 +50,9 @@ public abstract class ArtificialIntelligence {
     }
 
 
+    /**
+     * 移动当前所有可以移动单位
+     */
     void moveUnits() {
         updateUnitsReadyToMove();
         for (Unit unit : unitsReadyToMove) {
@@ -325,6 +328,13 @@ public abstract class ArtificialIntelligence {
     }
 
 
+    /**
+     * 清除棕榈树
+     * @param unit 执行动作的单位
+     * @param moveZone
+     * @param province
+     * @return
+     */
     boolean checkToCleanSomePalms(Unit unit, ArrayList<Hex> moveZone, Province province) {
         for (Hex hex : moveZone) {
             if (hex.objectInside == Obj.PALM && hex.sameColor(unit.currentHex)) {
@@ -336,6 +346,12 @@ public abstract class ArtificialIntelligence {
     }
 
 
+    /**
+     * 强度小于3的清树，否则看看能不能攻击，再不然
+     * @param unit 当前单位
+     * @param moveZone 可以移动的位置
+     * @param province 当前单位所在的地盘
+     */
     void decideAboutUnit(Unit unit, ArrayList<Hex> moveZone, Province province) {
         // cleaning palms has highest priority
         if (unit.strength <= 2 && checkToCleanSomePalms(unit, moveZone, province)) return;
@@ -382,6 +398,12 @@ public abstract class ArtificialIntelligence {
     }
 
 
+    /**
+     * 优先攻击塔，然后强塔，再就是被塔守护的地方
+     * @param attackableHexes 被攻击的地方
+     * @param strength 单位强度
+     * @return
+     */
     Hex findHexAttractiveToBaron(ArrayList<Hex> attackableHexes, int strength) {
         for (Hex attackableHex : attackableHexes) {
             if (attackableHex.objectInside == Obj.TOWER) return attackableHex;
@@ -413,6 +435,12 @@ public abstract class ArtificialIntelligence {
     }
 
 
+    /**
+     * 查找可以攻击的地块 就是和当前颜色不一样的地块就可攻击
+     * @param attackerColor 攻击者的颜色
+     * @param moveZone 可以被移动的区域
+     * @return
+     */
     ArrayList<Hex> findAttackableHexes(int attackerColor, ArrayList<Hex> moveZone) {
         tempResultList.clear();
         for (Hex hex : moveZone) {

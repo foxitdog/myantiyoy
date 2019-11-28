@@ -10,6 +10,9 @@ import yio.tro.antiyoy.stuff.Yio;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+/**
+ * 背景小球
+ */
 public class SplatController {
 
     private final YioGdxGame yioGdxGame;

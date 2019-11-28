@@ -59,6 +59,6 @@ public abstract class RepAction {
 
 
     protected String convertHexToTwoTokens(Hex hex) {
-        return hex.index1 + " " + hex.index2 + " ";
+        return hex.indexX + " " + hex.indexY + " ";
     }
 }

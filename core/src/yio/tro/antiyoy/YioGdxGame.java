@@ -53,6 +53,7 @@ public class YioGdxGame extends ApplicationAdapter implements InputProcessor {
     private long timeToUnPause;
     private int frameSkipCount;
     private FrameBuffer frameBuffer;
+//    漂浮泡背景过度曲线
     private FactorYio transitionFactor;
     public static final Random random = new Random();
     private boolean alreadyShownErrorMessageOnce;
@@ -71,6 +72,7 @@ public class YioGdxGame extends ApplicationAdapter implements InputProcessor {
     public int balanceIndicator[];
     public CampaignLevelFactory campaignLevelFactory;
     public SaveSystem saveSystem;
+    //进入游戏页面时的背景退出动画变化曲线
     FactorYio blackoutFactor;
     public SkinManager skinManager;
 
@@ -101,6 +103,9 @@ public class YioGdxGame extends ApplicationAdapter implements InputProcessor {
     }
 
 
+    /**
+     * 一般初始化
+     */
     private void generalInitialization() {
         long time1 = System.currentTimeMillis();
         loadedResources = true;

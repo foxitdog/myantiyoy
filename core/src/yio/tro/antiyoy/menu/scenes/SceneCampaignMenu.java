@@ -7,6 +7,9 @@ import yio.tro.antiyoy.menu.behaviors.Reaction;
 import yio.tro.antiyoy.menu.ButtonYio;
 import yio.tro.antiyoy.menu.MenuControllerYio;
 
+/**
+ * 战役
+ */
 public class SceneCampaignMenu extends AbstractScene{
 
     boolean updatedSelectorMetrics;

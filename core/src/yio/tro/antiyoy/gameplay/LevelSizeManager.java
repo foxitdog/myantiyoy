@@ -3,11 +3,23 @@ package yio.tro.antiyoy.gameplay;
 import yio.tro.antiyoy.stuff.GraphicsYio;
 import yio.tro.antiyoy.stuff.PointYio;
 
+/**
+ * 各地图大小等级的对应的边缘宽高
+ */
 public class LevelSizeManager {
 
     GameController gameController;
+    /**
+     * 地图大小
+     */
     public int levelSize;
+    /**
+     * 边界宽
+     */
     public float boundWidth;
+    /**
+     * 边界高
+     */
     public float boundHeight;
 
 

@@ -337,7 +337,7 @@ public class LevelEditor {
             String[] split = token.split(" ");
             int index1 = Integer.valueOf(split[0]);
             int index2 = Integer.valueOf(split[1]);
-            float y = fieldController.hexStep1 * index1 + fieldController.hexStep2 * index2 * (float) Math.cos(Math.PI / 3d);
+            float y = fieldController.hexhight * index1 + fieldController.hexStep2 * index2 * (float) Math.cos(Math.PI / 3d);
             if (min == -1 || y < min) {
                 min = y;
             }
@@ -347,7 +347,7 @@ public class LevelEditor {
         }
 
         float delta = max - min;
-        delta /= fieldController.hexStep1;
+        delta /= fieldController.hexhight;
         delta += 1;
 
         return delta <= MAX_ACCEPTABLE_DELTA;

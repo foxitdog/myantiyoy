@@ -1,0 +1,24 @@
+地图数据格式 mapinfo/hexinfo#hexinfo#hexinfo...
+地图信息数据格式(mapinfo = "difficulty levelSize playersNumber colorNumber")
+第一个数字：difficulty
+第二个数字：levelSize
+第三个数字：playersNumber
+第四个数字：colorNumber
+单位信息格式(hexinfo = "x y colorindex objectInside unitStrength isreadytomove moveZoneNumber")
+x x坐标
+y y坐标
+colorindex 颜色序号
+objectInside 建筑类型
+unitStrength 单位强度
+isreadytomove 是否可以移动 1可以移动 其他不可以移动
+moveZoneNumber 单位金币产出
+
+activeHexes
+
+
+hex hexsize 默认为宽的1/20 也就是说正常宽只能放10个六边形
+高为根号3 * hexsize
+
+hex 对象个数： 85*55
+fwidth 85
+fheight 55

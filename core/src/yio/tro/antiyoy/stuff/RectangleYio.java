@@ -56,6 +56,12 @@ public class RectangleYio implements ReusableYio {
     }
 
 
+    /**
+     * 判断指定点在该区域
+     * @param pointYio 点
+     * @param offset
+     * @return
+     */
     public boolean isPointInside(PointYio pointYio, float offset) {
         if (pointYio.x < x - offset) return false;
         if (pointYio.y < y - offset) return false;

@@ -97,7 +97,7 @@ public class SceneDebugTests extends AbstractScene{
         curY = 0.52;
         int id = 732;
 
-        for (AbstractTest test : tests) {
+        for (final AbstractTest test : tests) {
             createTestButton(id, test.getName(), new Reaction() {
                 @Override
                 public void perform(ButtonYio buttonYio) {

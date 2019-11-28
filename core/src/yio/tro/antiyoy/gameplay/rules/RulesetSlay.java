@@ -2,6 +2,9 @@ package yio.tro.antiyoy.gameplay.rules;
 
 import yio.tro.antiyoy.gameplay.*;
 
+/**
+ *
+ */
 public class RulesetSlay extends Ruleset{
 
     public RulesetSlay(GameController gameController) {
@@ -60,6 +63,11 @@ public class RulesetSlay extends Ruleset{
     }
 
 
+    /**
+     *
+     * @param strength
+     * @return
+     */
     @Override
     public int getUnitTax(int strength) {
         switch (strength) {

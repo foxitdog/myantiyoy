@@ -208,6 +208,9 @@ public class GameController {
     }
 
 
+    /**
+     * ai 移动
+     */
     private void checkForAiToMove() {
         if (readyToEndTurn) return;
 
@@ -998,6 +1001,12 @@ public class GameController {
     }
 
 
+    /**
+     * 移动单位 有和平移动既在自家移动，有攻击移动，占领地盘和灭杀敌方单位
+     * @param unit
+     * @param toWhere
+     * @param unitProvince
+     */
     public void moveUnit(Unit unit, Hex toWhere, Province unitProvince) {
         if (!unit.isReadyToMove()) {
             System.out.println("Someone tried to move unit that is not ready to move: " + unit);
@@ -1018,11 +1027,23 @@ public class GameController {
     }
 
 
+    /**
+     * 是否和平移动，既是否在自己的地盘
+     * @param unit
+     * @param toWhere
+     * @return
+     */
     private boolean isMovementPeaceful(Unit unit, Hex toWhere) {
         return unit.currentHex.sameColor(toWhere);
     }
 
 
+    /**
+     * 攻击或占领点
+     * @param unit
+     * @param destination
+     * @param unitProvince
+     */
     private void moveUnitWithAttack(Unit unit, Hex destination, Province unitProvince) {
         if (!destination.canBeAttackedBy(unit) || unitProvince == null) {
             System.out.println("Problem in GameController.moveUnitWithAttack");
@@ -1071,7 +1092,7 @@ public class GameController {
         if (!DebugFlags.showFocusedHexInConsole) return;
 
         Hex focusedHex = fieldController.focusedHex;
-        YioGdxGame.say("Hex: " + SceneSkirmishMenu.getColorStringBySliderIndex(focusedHex.colorIndex + 1) + " " + focusedHex.index1 + " " + focusedHex.index2);
+        YioGdxGame.say("Hex: " + SceneSkirmishMenu.getColorStringBySliderIndex(focusedHex.colorIndex + 1) + " " + focusedHex.indexX + " " + focusedHex.indexY);
     }
 
 

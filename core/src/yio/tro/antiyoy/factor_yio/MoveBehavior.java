@@ -27,6 +27,10 @@ abstract class MoveBehavior {
     }
 
 
+    /**
+     * 边缘固定
+     * @param fy
+     */
     void strictBounds(FactorYio fy) {
         if (fy.gravity > 0 && fy.f > 1) fy.f = 1;
         if (fy.gravity < 0 && fy.f < 0) fy.f = 0;

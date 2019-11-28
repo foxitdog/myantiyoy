@@ -15,7 +15,9 @@ import yio.tro.antiyoy.stuff.*;
 public class GameView {
 
     public final YioGdxGame yioGdxGame;
+
     public final GameController gameController;
+//    动画出现的过度曲线
     public final FactorYio appearFactor;
     private final FrameBuffer frameBuffer;
     SpriteBatch batchMovable, batchSolid;
@@ -53,6 +55,7 @@ public class GameView {
 
     public void createOrthoCam() {
         orthoCam = new OrthographicCamera(yioGdxGame.w, yioGdxGame.h);
+//        orthoCam.zoom=3;
         orthoCam.position.set(orthoCam.viewportWidth / 2f, orthoCam.viewportHeight / 2f, 0);
         updateCam();
     }

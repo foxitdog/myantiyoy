@@ -164,7 +164,7 @@ public class LevelSnapshot {
 
 
     private Hex getHexByCopy(Hex copy) {
-        return gameController.fieldController.field[copy.index1][copy.index2];
+        return gameController.fieldController.field[copy.indexX][copy.indexY];
     }
 
 
